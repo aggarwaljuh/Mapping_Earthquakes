@@ -12,8 +12,16 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // Then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
-let marker = L.marker([34.0522, -118.2437]).addTo(map);
+// An array containing each city's location, state, and population.
 
-L.circle([34.0522, -118.2437], {
-    radius: 100
- }).addTo(map);
+// Get data from cities.js
+let cityData = cities;
+
+// Loop through the cities array and create one marker for each city.
+// Loop through the cities array and create one marker for each city.
+cityData.forEach(function(city) {
+    console.log(city)
+    L.circleMarker(city.location, {radius:city.population/100000})
+    .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population + "</h3>")
+  .addTo(map);
+});
